@@ -8,6 +8,7 @@ import javax.xml.stream.events.DTD;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Data
 public class PageResultDto<DTO, ENT> {
@@ -36,6 +37,17 @@ public class PageResultDto<DTO, ENT> {
     }
 
     private void makePageList(Pageable pageable){
+     this.page = pageable.getPageNumber() +1;
+     this.size = pageable.getPageSize();
+
+     int temEnd = (int)(Math.ceil(page/10.0)) * 10;
+     start = temEnd - 9;
+// 삼항조건연산자에서 조건식 true면 마지막 화면이 아닌경우 false면 마지막화면이라는 의미
+     //마지막 화면이 아닌경우 1~3번째 화면(10, 20, 30), 마지막 화면은 4번째 화면을 의미
+     end = totalPage > temEnd ? temEnd: totalPage;
+     pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+     prev = start > 1;
+     next = totalPage > temEnd;
 
     }
 }

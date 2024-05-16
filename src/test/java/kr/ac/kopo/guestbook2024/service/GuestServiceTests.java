@@ -35,8 +35,17 @@ public class GuestServiceTests {
         PageRequestDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
         List<GuestbookDTO> list = resultDTO.getDtoList();
 
+        System.out.println("start:" + resultDTO.getStart());
+        System.out.println("end:" + resultDTO.getEnd());
+        System.out.println("previous:" + resultDTO.isPrev());
+        System.out.println("next:" + resultDTO.isNext());
+
         for (GuestbookDTO guestbookDTO : list){
             System.out.println(guestbookDTO);
+        }
+
+        for (Integer pageNum : resultDTO.getPageList()){
+            System.out.println(pageNum.intValue());
         }
     }
 }
