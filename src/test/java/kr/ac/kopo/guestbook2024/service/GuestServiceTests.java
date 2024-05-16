@@ -1,9 +1,12 @@
 package kr.ac.kopo.guestbook2024.service;
 
 import kr.ac.kopo.guestbook2024.dto.GuestbookDTO;
+import kr.ac.kopo.guestbook2024.dto.PageRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 @SpringBootTest
 public class GuestServiceTests {
@@ -20,5 +23,20 @@ public class GuestServiceTests {
                 .build();
 
         service.register(guestbookDTO);
+    }
+
+    @Test
+    public void testList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .build();
+
+        PageRequestDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
+        List<GuestbookDTO> list = resultDTO.getDtoList();
+
+        for (GuestbookDTO guestbookDTO : list){
+            System.out.println(guestbookDTO);
+        }
     }
 }
