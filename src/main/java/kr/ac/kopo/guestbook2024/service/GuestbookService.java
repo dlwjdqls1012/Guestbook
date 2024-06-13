@@ -2,15 +2,20 @@ package kr.ac.kopo.guestbook2024.service;
 
 import kr.ac.kopo.guestbook2024.dto.GuestbookDTO;
 import kr.ac.kopo.guestbook2024.dto.PageRequestDTO;
-import kr.ac.kopo.guestbook2024.entity.Guestbook;
+import kr.ac.kopo.guestbook2024.entity.QGuestbook;
 
 public interface GuestbookService  {
     Long register(GuestbookDTO dto);
     PageRequestDTO getList(PageRequestDTO resultDto);
+    GuestbookDTO read(Long gno);
 
-    default Guestbook dtoToEntity(GuestbookDTO dto){
+    void modify(GuestbookDTO dto);
 
-        Guestbook entity = Guestbook.bulider()
+    void remove(Long gno);
+
+    default QGuestbook dtoToEntity(GuestbookDTO dto){
+
+        QGuestbook entity = QGuestbook.bulider()
                 .gno(dto.getGno())
                 .title(dto.getTitle())
                 .writer(dto.getWriter())

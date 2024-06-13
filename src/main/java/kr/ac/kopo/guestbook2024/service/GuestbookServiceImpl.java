@@ -3,6 +3,7 @@ package kr.ac.kopo.guestbook2024.service;
 import kr.ac.kopo.guestbook2024.dto.GuestbookDTO;
 import kr.ac.kopo.guestbook2024.dto.PageRequestDTO;
 import kr.ac.kopo.guestbook2024.entity.Guestbook;
+import kr.ac.kopo.guestbook2024.entity.QGuestbook;
 import kr.ac.kopo.guestbook2024.repository.GuestbookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,4 +41,22 @@ public class GuestbookServiceImpl implements GuestbookService {
         Optional<Guestbook> result = repository.findById(gno);
         return result.isPresent()?entityToDto(result.get()):null;
     }
+
+    @Override
+    public void modify(GuestbookDTO dto) {
+        Optional<QGuestbook> result = repository.findById(dto.getGno());
+
+        if (result.isPresent()){
+            QGuestbook entity = result.get();
+            entity.changeTitle(dto.getTitle());
+            entity.changeContent(dto.getContent());
+            repository.save(entity);
+        }
+    }
+
+    @Override
+    public void remove(Long gno) {
+        repository.delteById(gno);
+    }
+
 }

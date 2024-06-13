@@ -47,5 +47,7 @@ public class QGuestbook extends EntityPathBase<Guestbook> {
         super(Guestbook.class, metadata);
     }
 
+    public static Object bulider() {
+    }
 }
 
