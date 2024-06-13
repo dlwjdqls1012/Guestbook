@@ -5,6 +5,7 @@
         <th:blok th:fragment="content">
             <h1 class="mt-4">Modify Page</h1>
             <form action="/guestbook/modify" method="post">
+                <input type="hidden" name="page">
                 <div class="form-group">
                     <label>Gno:</label>
                     <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
