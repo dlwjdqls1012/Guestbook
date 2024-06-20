@@ -1,5 +1,6 @@
 package kr.ac.kopo.guestbook2024.service;
 
+import com.querydsl.core.BooleanBuilder;
 import kr.ac.kopo.guestbook2024.dto.GuestbookDTO;
 import kr.ac.kopo.guestbook2024.dto.PageRequestDTO;
 import kr.ac.kopo.guestbook2024.entity.QGuestbook;
@@ -12,6 +13,8 @@ public interface GuestbookService  {
     void modify(GuestbookDTO dto);
 
     void remove(Long gno);
+
+    BooleanBuilder getSearch(PageRequestDTO requestDTO);
 
     default QGuestbook dtoToEntity(GuestbookDTO dto){
 

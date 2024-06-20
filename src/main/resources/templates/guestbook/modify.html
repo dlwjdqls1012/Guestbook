@@ -6,6 +6,8 @@
             <h1 class="mt-4">Modify Page</h1>
             <form action="/guestbook/modify" method="post">
                 <input type="hidden" name="page">
+                <input type="hidden" name="sea">
+                <input type="hidden" name="cle">
                 <div class="form-group">
                     <label>Gno:</label>
                     <input type="text" name="gno" class="form-control" th:value="${dto.gno}" readonly>
@@ -31,11 +33,9 @@
                     <input type="text" name="modDate" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
                 </div>
             </form>
-                <button type="button" class="btn btn-primary form-group">Modify</button>
-            <a th:href="@{/guestbook/list(page=${requestDTO.page})}">
-                <button type="button" class="btn btn-info form-group">List</button>
-            </a>
-                <button type="button" class="btn btn-danger form-group">Remove</button>
+                <button type="button" class="btn btn-primary form-group modifyBtn">Modify</button>
+                <button type="button" class="btn btn-info form-group listBtn">List</button>
+                <button type="button" class="btn btn-danger form-group removeBtn">Remove</button>
         </th:blok>
     </th:block>
     <script th:inline="javascript">
@@ -44,6 +44,26 @@
             actionForm.attr("action", "/guestbook/remove")
                 .attr("method", "post")
             actionForm.submit()
-        });z
+        });let actionForm = $("form");
+        $(".modifyBtn").click(function () {
+            actionForm.attr("action", "/guestbook/remove")
+                .attr("method", "post")
+            actionForm.submit()
+        });let actionForm = $("form");
+        $(".listBtn").click(function () {
+            var page = $("input[name='page']");
+            var page = $("input[name='type']");
+            var page = $("input[name='keyword']");
+
+            actionForm.empty();
+
+            actionForm.append(page);
+            actionForm.append(type);
+            actionForm.append(keyword);
+
+            actionForm.attr("action", "/guestbook/list")
+                .attr("method", "get")
+                .submit()
+        });
     </script>
 </html>
